@@ -7,3 +7,4 @@ Uas Sistem Pakar
 1. Muhammad Khalifah Erian
 2. Muhammad Noufal Rifqi Iman
 3. Jerrel Adriel Archibald Hutahaean
+4. Iqbal Fanosa Wiotama
