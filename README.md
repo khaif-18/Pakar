@@ -1,0 +1,2 @@
+# Pakar
+Uas Sistem Pakar
