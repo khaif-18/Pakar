@@ -17,6 +17,10 @@ a {
   font-family: "Raleway", sans-serif;
 }
 
+h1 {
+  font-weight: 600 !important;
+}
+
 .getstarted,
 .getstarted:focus {
   background: #3498db;
@@ -48,6 +52,7 @@ a {
   color: #3498db;
   border: 2px solid #3498db;
 }
+
 .btn-get-started:hover {
   background: #3498db;
   color: #fff;
@@ -79,7 +84,7 @@ a {
   margin: 0 0 10px 15px;
 }
 
-#carousel{
+#carousel {
   margin-bottom: 100px;
 }
 
@@ -89,28 +94,28 @@ a {
   padding-bottom: 5%;
 }
 
-#about .text{
+#about .text {
   background: #3498db;
   border-radius: 13px;
   padding-top: 10px;
-  padding-bottom: 10px;    
+  padding-bottom: 10px;
 }
 
-#about .card{
+#about .card {
   width: 210px;
-  border-color: #3498db ;
+  border-color: #3498db;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-weight: bold;
   font-size: 14px;
 }
 
-#about .text{
-  color:white
+#about .text {
+  color: white;
 }
 
-#about img{
-  height:210px;
+#about img {
+  height: 210px;
 }
 
 #contact {
@@ -139,7 +144,7 @@ a {
   padding-bottom: 60px;
   background-color: #3498db;
 }
-.form .row{
+.form .row {
   margin-top: 10px;
   background-color: rgb(106, 186, 223);
   border-radius: 10px;
@@ -148,11 +153,11 @@ a {
 .form-check-keyakinan {
   margin-top: 10px;
 }
-.form button{
+.form button {
   margin-bottom: 20px;
 }
 
-#keyakinan{
+#keyakinan {
   margin-top: 10px;
 }
 
