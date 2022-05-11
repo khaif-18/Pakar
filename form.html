@@ -1,294 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
-    <title>Halaman Beranda</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm bg-body">
-      <div class="container">
-        <a class="navbar-brand" href="#"><h4>E-Bengkel</h4></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="beranda.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a type="button" class="nav-link active getstarted" href="#">Get Started</a>
-            </li>
-          </ul>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+  </link>
+  <title>Halaman Beranda</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm bg-body">
+    <div class="container">
+      <a class="navbar-brand" href="beranda.html">
+        <h4>E-Bengkel</h4>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="beranda.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="nav-link active getstarted" href="#">Get Started</a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <section id="carousel">
-          <center class="pt-5"><h2>Sistem Keputusan untuk Tipe Layanan Servis Otomotif</h2></center>
-          <div class="container">
-            <br />
-            <div class="form">
-              <form action="" name="form" onsubmit="return false">
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="row mb-3">
-                            <label for="member" class="form-label">Apakah anda memiliki member?</label>
-                            <div class="col-sm-10">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="member" id="member" value="Ya"/>
-                                <label class="form-check-label" for="member"> Ya </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="member" id="member" value="Tidak" />
-                                <label class="form-check-label" for="member"> Tidak </label>
-                              </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
-                        <select class="form-select reason" id="cf_member" aria-label="Default select example">
-                            <option selected value="Sangat Yakin">Sangat Yakin</option>
-                            <option value="Yakin">Yakin</option>
-                            <option value="Cukup Yakin">Cukup Yakin</option>
-                            <option value="Kurang Yakin">Kurang Yakin</option>
-                            <option value="Tidak Tahu">Tidak Tahu</option>
-                            <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
-                            <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
-                            <option value="Tidak Yakin">Tidak Yakin</option>
-                            <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
-                        </select>
-                    </div>
+  <section id="carousel">
+    <center class="pt-5">
+      <h2>Sistem Keputusan untuk Tipe Layanan Servis Otomotif</h2>
+    </center>
+    <div class="container">
+      <br />
+      <div class="form">
+        <form action="" name="form" onsubmit="return false">
+          <div class="row">
+            <div class="col-md-6">
+              <fieldset class="row mb-3">
+                <label for="member" class="form-label">Apakah anda memiliki member?</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="member" id="member" value="Ya" />
+                    <label class="form-check-label" for="member"> Ya </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="member" id="member" value="Tidak" />
+                    <label class="form-check-label" for="member"> Tidak </label>
+                  </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="row mb-3">
-                            <label for="id_subs" class="form-label">Apakah anda memiliki id langganan?</label>
-                            <div class="col-sm-10">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id_subs" id="id_subs" value="Ya" required/>
-                                <label class="form-check-label" for="id_subs"> Ya </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id_subs" id="id_subs" value="Tidak" />
-                                <label class="form-check-label" for="id_subs"> Tidak </label>
-                              </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
-                        <select class="form-select reason" id="cf_idsubs" aria-label="Default select example">
-                            <option selected value="Sangat Yakin">Sangat Yakin</option>
-                            <option value="Yakin">Yakin</option>
-                            <option value="Cukup Yakin">Cukup Yakin</option>
-                            <option value="Kurang Yakin">Kurang Yakin</option>
-                            <option value="Tidak Tahu">Tidak Tahu</option>
-                            <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
-                            <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
-                            <option value="Tidak Yakin">Tidak Yakin</option>
-                            <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="reason" class="form-label">Apa jenis kasus anda?</label>
-                                <select class="form-select reason" id="reason" aria-label="Default select example">
-                                    <option selected value="New Case">Kasus Baru</option>
-                                    <option value="Follow Up Case">Kasus Lanjutan</option>
-                                    <option value="Information Other">Informasi Lain</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
-                        <select class="form-select reason" id="cf_reason" aria-label="Default select example">
-                            <option selected value="Sangat Yakin">Sangat Yakin</option>
-                            <option value="Yakin">Yakin</option>
-                            <option value="Cukup Yakin">Cukup Yakin</option>
-                            <option value="Kurang Yakin">Kurang Yakin</option>
-                            <option value="Tidak Tahu">Tidak Tahu</option>
-                            <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
-                            <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
-                            <option value="Tidak Yakin">Tidak Yakin</option>
-                            <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="row mb-3">
-                            <label for="inside" class="form-label">Apakah terdapat kerusakan di dalam mobil?</label>
-                            <div class="col-sm-10">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="inside" id="inside" value="Ya" required/>
-                                <label class="form-check-label" for="inside"> Ya </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="inside" id="inside" value="Tidak" />
-                                <label class="form-check-label" for="inside"> Tidak </label>
-                              </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
-                        <select class="form-select reason" id="cf_inside" aria-label="Default select example">
-                            <option selected value="Sangat Yakin">Sangat Yakin</option>
-                            <option value="Yakin">Yakin</option>
-                            <option value="Cukup Yakin">Cukup Yakin</option>
-                            <option value="Kurang Yakin">Kurang Yakin</option>
-                            <option value="Tidak Tahu">Tidak Tahu</option>
-                            <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
-                            <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
-                            <option value="Tidak Yakin">Tidak Yakin</option>
-                            <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="row mb-3">
-                            <label for="outside" class="form-label">Apakah terdapat kerusakan di luar mobil?</label>
-                            <div class="col-sm-10">
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="outside" id="outside" value="Ya" required/>
-                                <label class="form-check-label" for="outside"> Ya </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="outside" id="outside" value="Tidak" />
-                                <label class="form-check-label" for="outside"> Tidak </label>
-                              </div>
-                            </div>
-                          </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
-                        <select class="form-select reason" id="cf_outside" aria-label="Default select example">
-                            <option selected value="Sangat Yakin">Sangat Yakin</option>
-                            <option value="Yakin">Yakin</option>
-                            <option value="Cukup Yakin">Cukup Yakin</option>
-                            <option value="Kurang Yakin">Kurang Yakin</option>
-                            <option value="Tidak Tahu">Tidak Tahu</option>
-                            <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
-                            <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
-                            <option value="Tidak Yakin">Tidak Yakin</option>
-                            <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="check" required />
-                  <label class="form-check-label" for="check">Apakah anda yakin data di atas sudah benar?</label>
-                </div>
-                <button type="submit" class="btn btn-success" id="kirim">Submit</button>
-                <button type="reset" class="btn btn-danger" style="margin-right: 5px">Reset</button>
-              </form>
-              <div id="hasil"></div>
+              </fieldset>
+            </div>
+            <div class="col-md-6">
+              <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
+              <select class="form-select reason" id="cf_member" aria-label="Default select example">
+                <option selected value="Sangat Yakin">Sangat Yakin</option>
+                <option value="Yakin">Yakin</option>
+                <option value="Cukup Yakin">Cukup Yakin</option>
+                <option value="Kurang Yakin">Kurang Yakin</option>
+                <option value="Tidak Tahu">Tidak Tahu</option>
+                <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
+                <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
+                <option value="Tidak Yakin">Tidak Yakin</option>
+                <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
+              </select>
             </div>
           </div>
-    </section>
 
-    <section id="about" class="mt-5">
-      <div class="container">
-        <div class="section-title">
-          <h2>About Us</h2>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="mt-5">
-      <div class="container">
-        <div class="section-title">
-          <h2>Contact</h2>
-        </div>
-      </div>
-    </section>
-
-    <footer id="footer" class="mt-5">
-      <div class="container">
-        <div class="row d-flex align-items-center">
-          <div class="col-lg-12 text-lg-left text-center">
-            <div class="copyright">&copy; Copyright <strong>E-Bengkel</strong>. All Rights Reserved</div>
-            <div class="credits">Designed by Kelompok 6</a></div>
+          <div class="row">
+            <div class="col-md-6">
+              <fieldset class="row mb-3">
+                <label for="id_subs" class="form-label" id="id_langganan">Apakah anda memiliki id langganan?</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="id_subs" id="id_subs" value="Ya" required />
+                    <label class="form-check-label" for="id_subs"> Ya </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="id_subs" id="id_subs" value="Tidak" />
+                    <label class="form-check-label" for="id_subs"> Tidak </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-md-6">
+              <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
+              <select class="form-select reason" id="cf_idsubs" aria-label="Default select example">
+                <option selected value="Sangat Yakin">Sangat Yakin</option>
+                <option value="Yakin">Yakin</option>
+                <option value="Cukup Yakin">Cukup Yakin</option>
+                <option value="Kurang Yakin">Kurang Yakin</option>
+                <option value="Tidak Tahu">Tidak Tahu</option>
+                <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
+                <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
+                <option value="Tidak Yakin">Tidak Yakin</option>
+                <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
+              </select>
+            </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row mb-3">
+                <div class="col-12">
+                  <label for="reason" class="form-label">Apa jenis kasus anda?</label>
+                  <select class="form-select reason" id="reason" aria-label="Default select example">
+                    <option selected value="New Case">Kasus Baru</option>
+                    <option value="Follow Up Case">Kasus Lanjutan</option>
+                    <option value="Information Other">Informasi Lain</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
+              <select class="form-select reason" id="cf_reason" aria-label="Default select example">
+                <option selected value="Sangat Yakin">Sangat Yakin</option>
+                <option value="Yakin">Yakin</option>
+                <option value="Cukup Yakin">Cukup Yakin</option>
+                <option value="Kurang Yakin">Kurang Yakin</option>
+                <option value="Tidak Tahu">Tidak Tahu</option>
+                <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
+                <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
+                <option value="Tidak Yakin">Tidak Yakin</option>
+                <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <fieldset class="row mb-3">
+                <label for="inside" class="form-label">Apakah terdapat kerusakan di dalam mobil?</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="inside" id="inside" value="Ya" required />
+                    <label class="form-check-label" for="inside"> Ya </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="inside" id="inside" value="Tidak" />
+                    <label class="form-check-label" for="inside"> Tidak </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-md-6">
+              <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
+              <select class="form-select reason" id="cf_inside" aria-label="Default select example">
+                <option selected value="Sangat Yakin">Sangat Yakin</option>
+                <option value="Yakin">Yakin</option>
+                <option value="Cukup Yakin">Cukup Yakin</option>
+                <option value="Kurang Yakin">Kurang Yakin</option>
+                <option value="Tidak Tahu">Tidak Tahu</option>
+                <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
+                <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
+                <option value="Tidak Yakin">Tidak Yakin</option>
+                <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <fieldset class="row mb-3">
+                <label for="outside" class="form-label">Apakah terdapat kerusakan di luar mobil?</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="outside" id="outside" value="Ya" required />
+                    <label class="form-check-label" for="outside"> Ya </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="outside" id="outside" value="Tidak" />
+                    <label class="form-check-label" for="outside"> Tidak </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-md-6">
+              <label for="keyakinan" class="form-label">Seberapa yakin anda dengan jawaban anda?</label>
+              <select class="form-select reason" id="cf_outside" aria-label="Default select example">
+                <option selected value="Sangat Yakin">Sangat Yakin</option>
+                <option value="Yakin">Yakin</option>
+                <option value="Cukup Yakin">Cukup Yakin</option>
+                <option value="Kurang Yakin">Kurang Yakin</option>
+                <option value="Tidak Tahu">Tidak Tahu</option>
+                <option value="Kurang Tidak Yakin">Kurang Tidak Yakin</option>
+                <option value="Cukup Tidak Yakin">Cukup Tidak Yakin</option>
+                <option value="Tidak Yakin">Tidak Yakin</option>
+                <option value="Sangat tidak Yakin">Sangat tidak Yakin</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="check" required />
+            <label class="form-check-label" for="check">Apakah anda yakin data di atas sudah benar?</label>
+          </div>
+          <button type="submit" class="btn btn-success" id="kirim">Submit</button>
+          <button type="reset" class="btn btn-danger" style="margin-right: 5px">Reset</button>
+        </form>
+        <div id="hasil"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="mt-5">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Us</h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="mt-5">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact</h2>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer" class="mt-5">
+    <div class="container">
+      <div class="row d-flex align-items-center">
+        <div class="col-lg-12 text-lg-left text-center">
+          <div class="copyright">&copy; Copyright <strong>E-Bengkel</strong>. All Rights Reserved</div>
+          <div class="credits">Designed by Kelompok 6</a></div>
         </div>
       </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
   <script src="assets/js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- <script>
+  <script src="https: //unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
     jQuery(function () {
-      var member, reason = "New Case", inside, outside;
-      var risk;
-      $(':input[type="button"]').prop('disabled', true);
-      $(':input[type="radio"]').on('click', function (e) {
-        if ($('#member').is(":checked")) {
-          member = "Member"
-        }
-        else member = "Non Member"
-  
-        if ($('#inside').is(":checked")) {
-          inside = "Yes"
-        }
-        else inside = "No"
-  
-        if ($('#outside').is(":checked")) {
-          outside = "Yes"
-        }
-        else outside = "No"
-  
-      })
-      $("select.reason").change(function () {
-        reason = $(this).children("option:selected").val();
-      });
+      $(':input[type="submit"]').prop('disabled', true);
       $(':input[type="checkbox"]').on('click', function (e) {
         if ($('#check').is(":checked")) {
-          $(':input[type="button"]').prop('disabled', false);
-          $("button[type='button']").click(function () {
-            if (member == "Non Member") alert("Support = Non Member");
-            else {
-              if (inside == "Yes" || outside == "Yes") risk = "High Risk"
-              else risk = "No Risk"
-            }
-            if (reason == "New Case" && risk == "High Risk") alert("Support = Level High Support")
-            else if (reason == "New Case" && risk == "No Risk") alert("Support = Level Medium Support")
-            else if (reason == "Follow Up Case" && risk == "High Risk") alert("Support = Level High Support")
-            else if (reason == "Follow Up Case" && risk == "No Risk") alert("Support = Level Standard Support")
-            else if (reason == "Information Other") alert("Support = Information Other")
-          })
+          $(':input[type="submit"]').prop('disabled', false);
         }
         else {
-          $(':input[type="button"]').prop('disabled', true);
+          $(':input[type="submit"]').prop('disabled', true);
         }
       })
-  
-  
+
+
     });
-  
-  </script> -->
+
+  </script>
 </body>
+
 </html>
