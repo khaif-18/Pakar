@@ -79,9 +79,38 @@ a {
   margin: 0 0 10px 15px;
 }
 
+#carousel{
+  margin-bottom: 100px;
+}
+
 #about {
-  background-color: #f7fbfe;
+  background-color: #ebf3f9;
   padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+#about .text{
+  background: #3498db;
+  border-radius: 13px;
+  padding-top: 10px;
+  padding-bottom: 10px;    
+}
+
+#about .card{
+  width: 210px;
+  border-color: #3498db ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#about .text{
+  color:white
+}
+
+#about img{
+  height:210px;
 }
 
 #contact {
@@ -107,6 +136,24 @@ a {
   border: 1px solid black;
   border-radius: 10px;
   padding: 50px;
+  padding-bottom: 60px;
+  background-color: #3498db;
+}
+.form .row{
+  margin-top: 10px;
+  background-color: rgb(106, 186, 223);
+  border-radius: 10px;
+}
+
+.form-check-keyakinan {
+  margin-top: 10px;
+}
+.form button{
+  margin-bottom: 20px;
+}
+
+#keyakinan{
+  margin-top: 10px;
 }
 
 button {
