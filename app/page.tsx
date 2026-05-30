@@ -15,6 +15,8 @@ import {
   CheckCircle2,
   ChevronRight,
 } from "lucide-react";
+import TiltCard from "@/components/TiltCard";
+import MagneticWrapper from "@/components/MagneticWrapper";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -160,23 +162,27 @@ export default function Home() {
               custom={3}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Link
-                href="/konsultasi"
-                className="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-2xl text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-secondary/30 group"
-              >
-                Mulai Konsultasi Sekarang
-                <ArrowRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Link>
-              <Link
-                href="/knowledge-base"
-                className="inline-flex items-center justify-center gap-2 border border-primary/30 text-primary hover:bg-primary/10 font-semibold px-8 py-4 rounded-2xl text-lg transition-all duration-200"
-              >
-                <BookOpen size={20} />
-                Lihat Knowledge Base
-              </Link>
+              <MagneticWrapper>
+                <Link
+                  href="/konsultasi"
+                  className="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-2xl text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-secondary/30 group"
+                >
+                  Mulai Konsultasi Sekarang
+                  <ArrowRight
+                    size={20}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
+                </Link>
+              </MagneticWrapper>
+              <MagneticWrapper>
+                <Link
+                  href="/knowledge-base"
+                  className="inline-flex items-center justify-center gap-2 border border-primary/30 text-primary hover:bg-primary/10 font-semibold px-8 py-4 rounded-2xl text-lg transition-all duration-200"
+                >
+                  <BookOpen size={20} />
+                  Lihat Knowledge Base
+                </Link>
+              </MagneticWrapper>
             </motion.div>
           </motion.div>
 
@@ -225,20 +231,21 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map(({ icon: Icon, title, desc, color, bg }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="glass-card p-6 hover:bg-white/10 transition-all duration-300 group"
-              >
-                <div className={`w-12 h-12 ${bg} rounded-xl flex items-center justify-center mb-4`}>
-                  <Icon size={22} className={color} />
-                </div>
-                <h3 className="text-brand-50 font-bold text-lg mb-2">{title}</h3>
-                <p className="text-brand-300 text-sm leading-relaxed">{desc}</p>
-              </motion.div>
+              <TiltCard key={title} className="relative rounded-2xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="glass-card p-6 hover:bg-white/10 transition-colors duration-300 group h-full"
+                >
+                  <div className={`w-12 h-12 ${bg} rounded-xl flex items-center justify-center mb-4`}>
+                    <Icon size={22} className={color} />
+                  </div>
+                  <h3 className="text-brand-50 font-bold text-lg mb-2">{title}</h3>
+                  <p className="text-brand-300 text-sm leading-relaxed">{desc}</p>
+                </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>

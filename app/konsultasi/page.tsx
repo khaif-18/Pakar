@@ -16,6 +16,7 @@ import {
 import { useStore } from "@/lib/store";
 import { runExpertSystem } from "@/lib/expertSystem";
 import ConfidenceSelector from "@/components/ConfidenceSelector";
+import LiveCFMeter from "@/components/LiveCFMeter";
 
 const STEPS = [
   { id: 0, title: "Status Keanggotaan", icon: User, desc: "Data member & ID langganan" },
@@ -393,7 +394,7 @@ export default function KonsultasiPage() {
 
   return (
     <div className="min-h-screen bg-grid pt-24 pb-16 px-4">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -438,72 +439,83 @@ export default function KonsultasiPage() {
           />
         </div>
 
-        {/* Card */}
-        <div className="glass-card p-6 md:p-8 min-h-[400px] relative overflow-hidden">
-          <div className="mb-6">
-            <div className="flex items-center gap-2 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-2">
-              <span>Langkah {step + 1} dari {STEPS.length}</span>
+        {/* Two-column: wizard + live CF meter */}
+        <div className="flex gap-6 items-start">
+          {/* Wizard (main) */}
+          <div className="flex-1 min-w-0">
+            {/* Card */}
+            <div className="glass-card p-6 md:p-8 min-h-[400px] relative overflow-hidden">
+              <div className="mb-6">
+                <div className="flex items-center gap-2 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                  <span>Langkah {step + 1} dari {STEPS.length}</span>
+                </div>
+                <h2 className="text-xl font-bold text-brand-50">
+                  {STEPS[step].title}
+                </h2>
+                <p className="text-brand-300 text-sm">{STEPS[step].desc}</p>
+              </div>
+
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={step}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {stepComponents[step]}
+                </motion.div>
+              </AnimatePresence>
             </div>
-            <h2 className="text-xl font-bold text-brand-50">
-              {STEPS[step].title}
-            </h2>
-            <p className="text-brand-300 text-sm">{STEPS[step].desc}</p>
+
+            {/* Navigation */}
+            <div className="flex justify-between mt-6">
+              <button
+                onClick={goPrev}
+                disabled={step === 0}
+                className="flex items-center gap-2 px-5 py-3 rounded-xl border border-white/15 text-brand-300 hover:text-brand-50 hover:bg-white/5 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed font-medium"
+              >
+                <ChevronLeft size={18} />
+                Kembali
+              </button>
+
+              {step < STEPS.length - 1 ? (
+                <button
+                  onClick={goNext}
+                  disabled={!isStepValid()}
+                  className="flex items-center gap-2 bg-secondary hover:bg-brand-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200"
+                >
+                  Lanjut
+                  <ChevronRight size={18} />
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="flex items-center gap-2 bg-secondary hover:bg-brand-500 disabled:opacity-50 text-white font-bold px-6 py-3 rounded-xl transition-all duration-200"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Memproses...
+                    </>
+                  ) : (
+                    <>
+                      <CheckSquare size={18} />
+                      Proses Konsultasi
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
 
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={step}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              {stepComponents[step]}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Navigation */}
-        <div className="flex justify-between mt-6">
-          <button
-            onClick={goPrev}
-            disabled={step === 0}
-            className="flex items-center gap-2 px-5 py-3 rounded-xl border border-white/15 text-brand-300 hover:text-brand-50 hover:bg-white/5 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed font-medium"
-          >
-            <ChevronLeft size={18} />
-            Kembali
-          </button>
-
-          {step < STEPS.length - 1 ? (
-            <button
-              onClick={goNext}
-              disabled={!isStepValid()}
-              className="flex items-center gap-2 bg-secondary hover:bg-brand-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200"
-            >
-              Lanjut
-              <ChevronRight size={18} />
-            </button>
-          ) : (
-            <button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="flex items-center gap-2 bg-secondary hover:bg-brand-500 disabled:opacity-50 text-white font-bold px-6 py-3 rounded-xl transition-all duration-200"
-            >
-              {loading ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" />
-                  Memproses...
-                </>
-              ) : (
-                <>
-                  <CheckSquare size={18} />
-                  Proses Konsultasi
-                </>
-              )}
-            </button>
-          )}
+          {/* Live CF Meter sidebar */}
+          <div className="hidden lg:block w-52 flex-shrink-0 sticky top-28">
+            <LiveCFMeter formData={formData} />
+          </div>
         </div>
       </div>
     </div>
