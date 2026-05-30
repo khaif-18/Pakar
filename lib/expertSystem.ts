@@ -240,7 +240,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R1",
     condition: "Member = Ya DAN ID Langganan = Ya",
-    result: "Status Member = Terverifikasi",
+    result: " → Status Member = Terverifikasi",
     cfRule: 0.8,
     formula: "CF = min(CF_member, CF_subId) × 0.8",
     category: "Member",
@@ -249,7 +249,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R2",
     condition: "Member = Ya DAN ID Langganan = Tidak",
-    result: "Status Member = Tidak Valid",
+    result: " → Status Member = Tidak Valid",
     cfRule: 0.7,
     formula: "CF = min(CF_member, CF_subId) × 0.7",
     category: "Member",
@@ -258,7 +258,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R3",
     condition: "Member = Tidak",
-    result: "Status Member = Non-Member",
+    result: " → Status Member = Non-Member",
     cfRule: 0.65,
     formula: "CF = CF_member × 0.65",
     category: "Member",
@@ -267,7 +267,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R4",
     condition: "Kerusakan Dalam = Ya",
-    result: "Severity = High Risk",
+    result: " → Severity = High Risk",
     cfRule: 0.9,
     formula: "CF = min(CF_dalam, CF_luar) × 0.9",
     category: "Problem",
@@ -276,7 +276,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R5",
     condition: "Kerusakan Dalam = Tidak DAN Kerusakan Luar = Ya",
-    result: "Severity = High Risk",
+    result: " → Severity = High Risk",
     cfRule: 0.8,
     formula: "CF = min(CF_dalam, CF_luar) × 0.8",
     category: "Problem",
@@ -285,7 +285,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R6",
     condition: "Kerusakan Dalam = Tidak DAN Kerusakan Luar = Tidak",
-    result: "Severity = No Risk",
+    result: " → Severity = No Risk",
     cfRule: 0.6,
     formula: "CF = min(CF_dalam, CF_luar) × 0.6",
     category: "Problem",
@@ -294,7 +294,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R7",
     condition: "Tipe Kasus = [Kasus Baru / Lanjutan / Informasi Lain]",
-    result: "CF_kasus = |CF_input|",
+    result: " → CF_kasus = |CF_input|",
     cfRule: 1.0,
     formula: "CF = |CF_kasus|",
     category: "Case",
@@ -303,7 +303,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R8",
     condition: "Status Member = Tidak Valid / Non-Member",
-    result: "→ Non Member Support",
+    result: " → Non Member Support",
     cfRule: 0.6,
     formula: "CF = min(CF_member, CF_kasus, CF_problem) × 0.6",
     category: "Recommendation",
@@ -312,7 +312,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R9",
     condition: "Member = Valid DAN Kasus = Informasi Lain",
-    result: "→ Information Other",
+    result: " → Information Other",
     cfRule: 0.65,
     formula: "CF = min(CF_member, CF_kasus, CF_problem) × 0.65",
     category: "Recommendation",
@@ -321,7 +321,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R10",
     condition: "Member = Valid DAN Kasus Baru DAN Severity = High Risk",
-    result: "→ Level High Support",
+    result: " → Level High Support",
     cfRule: 0.9,
     formula: "CF = min(CF_member, CF_kasus, CF_problem) × 0.9",
     category: "Recommendation",
@@ -330,7 +330,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R11",
     condition: "Member = Valid DAN Kasus Baru DAN Severity = No Risk",
-    result: "→ Level Medium Support",
+    result: " → Level Medium Support",
     cfRule: 0.85,
     formula: "CF = min(CF_member, CF_kasus, CF_problem) × 0.85",
     category: "Recommendation",
@@ -339,7 +339,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R12",
     condition: "Member = Valid DAN Kasus Lanjutan DAN Severity = High Risk",
-    result: "→ Level High Support",
+    result: " → Level High Support",
     cfRule: 1.0,
     formula: "CF = min(CF_member, CF_kasus, CF_problem) × 1.0",
     category: "Recommendation",
@@ -348,7 +348,7 @@ export const KNOWLEDGE_BASE_RULES = [
   {
     id: "R13",
     condition: "Member = Valid DAN Kasus Lanjutan DAN Severity = No Risk",
-    result: "→ Level Standard Support",
+    result: " → Level Standard Support",
     cfRule: 0.7,
     formula: "CF = min(CF_member, CF_kasus, CF_problem) × 0.7",
     category: "Recommendation",

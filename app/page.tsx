@@ -102,10 +102,10 @@ const supportLevels = [
 ];
 
 const team = [
-  { name: "Iqbal Fanosa Wiotama", role: "Lead Developer" },
-  { name: "Jerrel Adriel A. H.", role: "Expert System Analyst" },
-  { name: "M. Khalifah Erian", role: "UI/UX Designer" },
+  { name: "M. Khalifah Erian", role: "Lead Developer & PM" },
+  { name: "Jerrel Adriel A. H.", role: "Expert Frontend Developer" },
   { name: "M. Noufal Rifqi Iman", role: "Knowledge Engineer" },
+  { name: "Iqbal Fanosa Wiotama", role: "UI/UX Designer" },
   { name: "Pahriza Andresta", role: "System Architect" },
 ];
 

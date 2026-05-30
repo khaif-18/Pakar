@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Wrench, ExternalLink, Mail, MessageCircle } from "lucide-react";
 
 const team = [
-  "Iqbal Fanosa Wiotama",
-  "Jerrel Adriel Archibald Hutahaean",
   "Muhammad Khalifah Erian",
+  "Jerrel Adriel Archibald Hutahaean",
   "Muhammad Noufal Rifqi Iman",
+  "Iqbal Fanosa Wiotama",
   "Pahriza Andresta",
 ];
 
