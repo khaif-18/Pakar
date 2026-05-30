@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, type Variants, useInView, animate } from "framer-motion";
 import Link from "next/link";
 import {
   Wrench,
@@ -111,6 +112,31 @@ const team = [
   { name: "Pahriza Andresta", role: "System Architect" },
 ];
 
+function StatCard({ val, label }: { val: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const [display, setDisplay] = useState(val);
+  const isNumeric = !isNaN(Number(val));
+
+  useEffect(() => {
+    if (!isInView || !isNumeric) return;
+    const target = Number(val);
+    const controls = animate(0, target, {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => setDisplay(Math.round(v).toString()),
+    });
+    return () => controls.stop();
+  }, [isInView, isNumeric, val]);
+
+  return (
+    <div ref={ref} className="glass-card p-4 text-center rounded-xl">
+      <p className="text-3xl font-black text-primary">{display}</p>
+      <p className="text-brand-300 text-xs mt-1">{label}</p>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="bg-grid min-h-screen">
@@ -199,13 +225,7 @@ export default function Home() {
               { val: "9", label: "Skala Keyakinan" },
               { val: "CF", label: "Metode Inferensi" },
             ].map(({ val, label }) => (
-              <div
-                key={label}
-                className="glass-card p-4 text-center rounded-xl"
-              >
-                <p className="text-3xl font-black text-primary">{val}</p>
-                <p className="text-brand-300 text-xs mt-1">{label}</p>
-              </div>
+              <StatCard key={label} val={val} label={label} />
             ))}
           </motion.div>
         </div>

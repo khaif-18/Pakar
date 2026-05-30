@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, animate } from "framer-motion";
 import Link from "next/link";
 import {
   RadialBarChart,
@@ -30,6 +30,7 @@ import { useStore } from "@/lib/store";
 import { SUPPORT_LEVEL_META } from "@/lib/expertSystem";
 import { formatCF, formatDate } from "@/lib/utils";
 import type { SupportLevel } from "@/lib/types";
+import Confetti from "@/components/Confetti";
 
 const levelIcons: Record<SupportLevel, React.ElementType> = {
   "Level High Support": AlertTriangle,
@@ -93,10 +94,47 @@ const CustomTooltip = ({
 export default function HasilPage() {
   const { result, resetForm } = useStore();
   const router = useRouter();
+  const cfRef = useRef<HTMLSpanElement>(null);
+  const cfRef2 = useRef<HTMLSpanElement>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     if (!result) router.replace("/konsultasi");
   }, [result, router]);
+
+  useEffect(() => {
+    if (!result) return;
+
+    const celebrationLevels: SupportLevel[] = ["Level High Support", "Level Medium Support", "Level Standard Support"];
+    if (celebrationLevels.includes(result.recommendation)) {
+      const t = setTimeout(() => setShowConfetti(true), 300);
+      return () => clearTimeout(t);
+    }
+  }, [result]);
+
+  useEffect(() => {
+    if (!result) return;
+    const target = Math.max(0, result.cfFinal);
+
+    const controls1 = animate(0, target, {
+      duration: 1.4,
+      delay: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => {
+        if (cfRef.current) cfRef.current.textContent = formatCF(v);
+      },
+    });
+    const controls2 = animate(0, target, {
+      duration: 1.4,
+      delay: 0.5,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => {
+        if (cfRef2.current) cfRef2.current.textContent = formatCF(v);
+      },
+    });
+
+    return () => { controls1.stop(); controls2.stop(); };
+  }, [result]);
 
   if (!result) return null;
 
@@ -134,6 +172,7 @@ export default function HasilPage() {
 
   return (
     <div className="min-h-screen bg-grid pt-24 pb-16 px-4">
+      {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -205,7 +244,7 @@ export default function HasilPage() {
                       Certainty Factor
                     </p>
                     <p className="text-4xl font-black text-primary mt-1">
-                      {formatCF(result.cfFinal)}
+                      <span ref={cfRef}>0.0%</span>
                     </p>
                   </div>
                   <div className="text-right">
@@ -317,7 +356,7 @@ export default function HasilPage() {
               </div>
               <div className="-mt-6">
                 <p className="text-4xl font-black text-primary">
-                  {formatCF(result.cfFinal)}
+                  <span ref={cfRef2}>0.0%</span>
                 </p>
                 <p className="text-brand-400 text-xs mt-1">Certainty Factor Final</p>
               </div>
