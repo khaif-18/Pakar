@@ -181,25 +181,34 @@ export default function HasilPage() {
           className="flex items-center justify-between mb-8"
         >
           <div>
-            <h1 className="text-3xl font-black text-brand-50">Hasil Konsultasi</h1>
-            <p className="text-brand-300 text-sm mt-1">
+            <p className="overline mb-1">HASIL KONSULTASI</p>
+            <h1
+              className="display-heading text-4xl text-brand-50"
+              style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 900 }}
+            >
+              REKOMENDASI SISTEM
+            </h1>
+            <p
+              className="text-brand-500 text-xs mt-1.5"
+              style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem" }}
+            >
               {formatDate(result.timestamp)}
             </p>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => window.print()}
-              className="p-2.5 rounded-xl border border-white/15 text-brand-300 hover:text-brand-50 hover:bg-white/5 transition-all"
+              className="btn-ghost p-2.5"
               title="Print"
             >
-              <Printer size={18} />
+              <Printer size={16} />
             </button>
             <Link
               href="/history"
-              className="p-2.5 rounded-xl border border-white/15 text-brand-300 hover:text-brand-50 hover:bg-white/5 transition-all"
+              className="btn-ghost p-2.5"
               title="Riwayat"
             >
-              <History size={18} />
+              <History size={16} />
             </Link>
           </div>
         </motion.div>
@@ -212,53 +221,64 @@ export default function HasilPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className={`glass-card p-7 border ${colors.border}`}
+              className={`panel p-7 border-t-2`}
+              style={{ borderTopColor: colors.gauge }}
             >
-              <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5 ${colors.bg} ${colors.text}`}>
-                {meta.badge}
-              </div>
+              <div className="rule-tag mb-5">{meta.badge}</div>
 
               <div className="flex items-start gap-4">
-                <div className={`w-14 h-14 rounded-2xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
-                  <LevelIcon size={26} className={colors.text} />
+                <div className="w-12 h-12 rounded border flex items-center justify-center flex-shrink-0"
+                     style={{ borderColor: colors.gauge + "40", background: colors.gauge + "15" }}>
+                  <LevelIcon size={22} className={colors.text} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-black text-brand-50 leading-tight">
-                    {result.recommendation}
+                  <h2
+                    className="text-2xl text-brand-50 leading-tight"
+                    style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 800, letterSpacing: "0.02em" }}
+                  >
+                    {result.recommendation.toUpperCase()}
                   </h2>
-                  <p className={`text-sm font-semibold mt-1 ${colors.text}`}>
-                    Rule {result.ruleApplied} terpenuhi
-                  </p>
+                  <span className="rule-tag mt-1 inline-block">RULE {result.ruleApplied}</span>
                 </div>
               </div>
 
-              <p className="text-brand-200 text-sm leading-relaxed mt-5">
+              <p className="text-brand-300 text-sm leading-relaxed mt-5">
                 {result.description}
               </p>
 
               {/* CF Score */}
-              <div className="mt-6 pt-5 border-t border-white/10">
+              <div className="mt-6 pt-5 border-t border-brand-200/8">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-brand-400 text-xs uppercase tracking-wider">
-                      Certainty Factor
+                    <p
+                      className="text-brand-500 text-xs mb-1 uppercase tracking-widest"
+                      style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.6rem", letterSpacing: "0.2em" }}
+                    >
+                      CERTAINTY FACTOR
                     </p>
-                    <p className="text-4xl font-black text-primary mt-1">
+                    <p
+                      className="text-5xl font-bold cf-value amber-glow"
+                      style={{ fontFamily: "JetBrains Mono, monospace" }}
+                    >
                       <span ref={cfRef}>0.0%</span>
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-brand-400 text-xs uppercase tracking-wider">
-                      Tingkat Keyakinan
+                    <p
+                      className="text-brand-500 text-xs mb-1 uppercase tracking-widest"
+                      style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.6rem", letterSpacing: "0.2em" }}
+                    >
+                      KEYAKINAN
                     </p>
-                    <p className={`text-xl font-bold mt-1 ${
-                      result.cfFinal >= 0.7
-                        ? "text-emerald-400"
-                        : result.cfFinal >= 0.4
-                        ? "text-yellow-400"
+                    <p
+                      className={`text-2xl font-bold ${
+                        result.cfFinal >= 0.7 ? "text-emerald-400"
+                        : result.cfFinal >= 0.4 ? "text-yellow-400"
                         : "text-red-400"
-                    }`}>
-                      {result.cfFinal >= 0.7 ? "Tinggi" : result.cfFinal >= 0.4 ? "Sedang" : "Rendah"}
+                      }`}
+                      style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 800 }}
+                    >
+                      {result.cfFinal >= 0.7 ? "TINGGI" : result.cfFinal >= 0.4 ? "SEDANG" : "RENDAH"}
                     </p>
                   </div>
                 </div>
@@ -270,31 +290,37 @@ export default function HasilPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="glass-card p-6"
+              className="panel p-6"
             >
-              <h3 className="text-brand-50 font-bold text-base mb-5">
-                Breakdown Faktor CF
-              </h3>
+              <p className="overline mb-5">BREAKDOWN FAKTOR CF</p>
 
               {[result.cfMemberFactor, result.cfCaseFactor, result.cfProblemFactor].map((f, i) => (
-                <div key={f.rule} className="mb-4 last:mb-0">
+                <div key={f.rule} className="mb-5 last:mb-0">
                   <div className="flex justify-between items-center mb-1.5">
-                    <div>
-                      <span className="text-brand-50 text-sm font-medium">{f.label}</span>
-                      <span className="ml-2 text-brand-500 text-xs font-mono">{f.rule}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="rule-tag">{f.rule}</span>
+                      <span className="text-brand-200 text-sm">{f.label}</span>
                     </div>
-                    <span className="text-primary text-sm font-bold">{formatCF(f.cf)}</span>
+                    <span
+                      className="cf-value text-sm"
+                      style={{ fontFamily: "JetBrains Mono, monospace" }}
+                    >
+                      {formatCF(f.cf)}
+                    </span>
                   </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-1 bg-brand-200/8 overflow-hidden">
                     <motion.div
-                      className="h-full rounded-full"
+                      className="h-full"
                       style={{ backgroundColor: barColors[i] }}
                       initial={{ width: 0 }}
                       animate={{ width: `${Math.max(0, f.cf) * 100}%` }}
-                      transition={{ delay: 0.4 + i * 0.1, duration: 0.6, ease: "easeOut" }}
+                      transition={{ delay: 0.4 + i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     />
                   </div>
-                  <p className="text-brand-400 text-xs mt-1">{f.explanation}</p>
+                  <p className="text-brand-500 text-xs mt-1.5"
+                     style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.6rem" }}>
+                    {f.explanation}
+                  </p>
                 </div>
               ))}
             </motion.div>
@@ -309,17 +335,18 @@ export default function HasilPage() {
               <Link
                 href="/konsultasi"
                 onClick={resetForm}
-                className="flex-1 flex items-center justify-center gap-2 border border-white/15 text-brand-200 hover:text-brand-50 hover:bg-white/5 font-medium px-5 py-3 rounded-xl transition-all duration-200"
+                className="btn-amber flex-1 justify-center"
+              style={{ borderRadius: "0.375rem" }}
               >
-                <RotateCcw size={16} />
+                <RotateCcw size={15} />
                 Konsultasi Baru
               </Link>
               <Link
                 href="/"
-                className="flex-1 flex items-center justify-center gap-2 bg-secondary/20 hover:bg-secondary/30 text-primary font-medium px-5 py-3 rounded-xl transition-all duration-200"
+                className="btn-outline flex-1 justify-center"
               >
-                <ArrowLeft size={16} />
-                Kembali ke Beranda
+                <ArrowLeft size={15} />
+                Beranda
               </Link>
             </motion.div>
           </div>
@@ -331,11 +358,9 @@ export default function HasilPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="glass-card p-6 text-center"
+              className="panel p-6 text-center"
             >
-              <h3 className="text-brand-50 font-bold text-sm uppercase tracking-wider mb-2">
-                Confidence Gauge
-              </h3>
+              <p className="overline mb-2">CONFIDENCE GAUGE</p>
               <div className="h-44 flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadialBarChart
@@ -367,11 +392,9 @@ export default function HasilPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
-              className="glass-card p-6"
+              className="panel p-6"
             >
-              <h3 className="text-brand-50 font-bold text-sm uppercase tracking-wider mb-4">
-                CF per Faktor
-              </h3>
+              <p className="overline mb-4">CF PER FAKTOR</p>
               <div className="h-40">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={barData} layout="vertical" margin={{ left: 0, right: 20 }}>
@@ -393,28 +416,28 @@ export default function HasilPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
-              className="glass-card p-5 space-y-3"
+              className="panel p-5 space-y-4"
             >
-              <h3 className="text-brand-50 font-bold text-sm uppercase tracking-wider">
-                Ringkasan Diagnosis
-              </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-brand-300">Status Member</span>
-                  <span className={`font-semibold ${result.memberStatusResult ? "text-emerald-400" : "text-red-400"}`}>
-                    {result.memberStatusResult ? "Terverifikasi" : "Tidak Valid"}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-brand-300">Tingkat Risiko</span>
-                  <span className={`font-semibold ${result.severityResult === "High Risk" ? "text-red-400" : "text-emerald-400"}`}>
-                    {result.severityResult}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-brand-300">Rule Diterapkan</span>
-                  <span className="text-primary font-mono font-bold">{result.ruleApplied}</span>
-                </div>
+              <p className="overline">RINGKASAN DIAGNOSIS</p>
+              <div className="space-y-3">
+                {[
+                  { label: "Status Member", val: result.memberStatusResult ? "TERVERIFIKASI" : "TIDAK VALID", ok: result.memberStatusResult },
+                  { label: "Tingkat Risiko", val: result.severityResult, ok: result.severityResult !== "High Risk" },
+                  { label: "Rule Diterapkan", val: result.ruleApplied, ok: true, mono: true },
+                ].map(({ label, val, ok, mono }) => (
+                  <div key={label} className="flex justify-between items-center">
+                    <span className="text-brand-400 text-xs"
+                          style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem", letterSpacing: "0.1em" }}>
+                      {label.toUpperCase()}
+                    </span>
+                    <span
+                      className={`text-xs font-bold ${mono ? "cf-value" : ok ? "text-emerald-400" : "text-red-400"}`}
+                      style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.7rem" }}
+                    >
+                      {val}
+                    </span>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>

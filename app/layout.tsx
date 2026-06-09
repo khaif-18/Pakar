@@ -10,14 +10,10 @@ export const metadata: Metadata = {
   keywords: "sistem pakar, bengkel, otomotif, certainty factor, konsultasi kendaraan",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id">
-      <body className="bg-brand-600 text-brand-50 min-h-screen antialiased">
+      <body className="min-h-screen antialiased bg-brand-900 text-brand-50">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

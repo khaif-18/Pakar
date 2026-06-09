@@ -14,7 +14,6 @@ import {
   Info,
   ShieldOff,
   ChevronDown,
-  ChevronUp,
   Search,
   BarChart3,
 } from "lucide-react";
@@ -22,12 +21,12 @@ import { useStore } from "@/lib/store";
 import { formatCF, formatDate } from "@/lib/utils";
 import type { SupportLevel } from "@/lib/types";
 
-const levelColors: Record<SupportLevel, { text: string; bg: string; dot: string }> = {
-  "Level High Support": { text: "text-red-400", bg: "bg-red-500/10", dot: "bg-red-500" },
-  "Level Medium Support": { text: "text-orange-400", bg: "bg-orange-500/10", dot: "bg-orange-500" },
-  "Level Standard Support": { text: "text-blue-400", bg: "bg-blue-500/10", dot: "bg-blue-500" },
-  "Information Other": { text: "text-purple-400", bg: "bg-purple-500/10", dot: "bg-purple-500" },
-  "Non Member Support": { text: "text-gray-400", bg: "bg-gray-500/10", dot: "bg-gray-500" },
+const levelColors: Record<SupportLevel, { text: string; bg: string; dot: string; gauge: string }> = {
+  "Level High Support": { text: "text-red-400", bg: "bg-red-500/10", dot: "bg-red-500", gauge: "#ef4444" },
+  "Level Medium Support": { text: "text-orange-400", bg: "bg-orange-500/10", dot: "bg-orange-500", gauge: "#f97316" },
+  "Level Standard Support": { text: "text-blue-400", bg: "bg-blue-500/10", dot: "bg-blue-500", gauge: "#3b82f6" },
+  "Information Other": { text: "text-purple-400", bg: "bg-purple-500/10", dot: "bg-purple-500", gauge: "#a855f7" },
+  "Non Member Support": { text: "text-gray-400", bg: "bg-gray-500/10", dot: "bg-gray-500", gauge: "#6b7280" },
 };
 
 const levelIcons: Record<SupportLevel, React.ElementType> = {
@@ -86,29 +85,33 @@ export default function HistoryPage() {
           className="mb-8"
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center">
-                <History size={22} className="text-primary" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-black text-brand-50">Riwayat Konsultasi</h1>
-                <p className="text-brand-300 text-sm">{history.length} konsultasi tersimpan</p>
-              </div>
+            <div>
+              <p className="overline mb-1">RIWAYAT SISTEM</p>
+              <h1
+                className="display-heading text-4xl text-brand-50"
+                style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 900 }}
+              >
+                HISTORY KONSULTASI
+              </h1>
+              <p
+                className="text-brand-500 text-xs mt-1"
+                style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem" }}
+              >
+                {history.length} SESSION TERSIMPAN
+              </p>
             </div>
 
             <div className="flex gap-2">
               {history.length > 0 && (
                 <>
-                  <button
-                    onClick={handleExport}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/15 text-brand-300 hover:text-brand-50 hover:bg-white/5 transition-all text-sm font-medium"
-                  >
+                  <button onClick={handleExport} className="btn-ghost">
                     <Download size={15} />
                     Export
                   </button>
                   <button
                     onClick={() => setShowClearConfirm(true)}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-red-500/20 text-red-400 hover:bg-red-500/10 transition-all text-sm font-medium"
+                    className="flex items-center gap-2 px-4 py-2.5 border border-red-500/20 text-red-400 hover:bg-red-500/10 transition-all text-sm font-medium"
+                    style={{ borderRadius: "0.375rem" }}
                   >
                     <Trash2 size={15} />
                     Hapus Semua
@@ -128,16 +131,26 @@ export default function HistoryPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6"
           >
             {[
-              { icon: BarChart3, label: "Total", val: stats.total, color: "text-primary" },
-              { icon: AlertTriangle, label: "High Priority", val: stats.highSupport, color: "text-red-400" },
-              { icon: CheckCircle2, label: "Avg CF", val: formatCF(stats.avgCF), color: "text-emerald-400" },
-              { icon: Shield, label: "Member", val: stats.members, color: "text-blue-400" },
+              { icon: BarChart3, label: "TOTAL", val: stats.total, color: "text-accent" },
+              { icon: AlertTriangle, label: "HIGH PRIORITY", val: stats.highSupport, color: "text-red-400" },
+              { icon: CheckCircle2, label: "AVG CF", val: formatCF(stats.avgCF), color: "text-emerald-400" },
+              { icon: Shield, label: "MEMBER", val: stats.members, color: "text-blue-400" },
             ].map(({ icon: Icon, label, val, color }) => (
-              <div key={label} className="glass-card p-4 flex items-center gap-3">
-                <Icon size={18} className={color} />
+              <div key={label} className="panel p-4 flex items-center gap-3">
+                <Icon size={16} className={`${color} flex-shrink-0`} />
                 <div>
-                  <p className={`text-xl font-black ${color}`}>{val}</p>
-                  <p className="text-brand-400 text-xs">{label}</p>
+                  <p
+                    className={`text-xl font-black ${color}`}
+                    style={{ fontFamily: "JetBrains Mono, monospace" }}
+                  >
+                    {val}
+                  </p>
+                  <p
+                    className="text-brand-500 text-xs mt-0.5"
+                    style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.55rem", letterSpacing: "0.12em" }}
+                  >
+                    {label}
+                  </p>
                 </div>
               </div>
             ))}
@@ -148,20 +161,23 @@ export default function HistoryPage() {
         {history.length > 0 && (
           <div className="flex gap-3 mb-5">
             <div className="relative flex-1">
-              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-400" />
+              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-500" />
               <input
                 type="text"
                 placeholder="Cari rekomendasi atau rule..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-white/5 border border-white/15 rounded-xl pl-9 pr-4 py-2.5 text-brand-200 placeholder:text-brand-500 text-sm focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/30 transition-all"
+                className="field w-full pl-9 pr-4 py-2.5 text-sm"
               />
             </div>
             <button
               onClick={() => setSortDir((d) => (d === "desc" ? "asc" : "desc"))}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/15 text-brand-300 hover:bg-white/5 transition-all text-sm"
+              className="btn-ghost"
             >
-              {sortDir === "desc" ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${sortDir === "asc" ? "rotate-180" : ""}`}
+              />
               Terbaru
             </button>
           </div>
@@ -174,27 +190,29 @@ export default function HistoryPage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="glass-card p-5 mb-5 border border-red-500/30 bg-red-500/5"
+              className="panel p-5 mb-5 border-l-2 border-red-500/50"
             >
-              <p className="text-brand-50 font-semibold mb-3">
-                Hapus semua {history.length} riwayat konsultasi?
+              <p
+                className="text-brand-50 mb-1"
+                style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 700, fontSize: "1.1rem", letterSpacing: "0.02em" }}
+              >
+                HAPUS SEMUA {history.length} RIWAYAT?
               </p>
-              <p className="text-brand-300 text-sm mb-4">
+              <p className="text-brand-400 text-sm mb-4">
                 Tindakan ini tidak dapat dibatalkan. Pastikan Anda sudah export data jika diperlukan.
               </p>
               <div className="flex gap-3">
                 <button
-                  onClick={() => {
-                    clearHistory();
-                    setShowClearConfirm(false);
-                  }}
-                  className="px-5 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white font-semibold text-sm transition-colors"
+                  onClick={() => { clearHistory(); setShowClearConfirm(false); }}
+                  className="flex items-center gap-2 px-5 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold text-sm transition-colors"
+                  style={{ borderRadius: "0.375rem" }}
                 >
+                  <Trash2 size={14} />
                   Ya, Hapus Semua
                 </button>
                 <button
                   onClick={() => setShowClearConfirm(false)}
-                  className="px-5 py-2 rounded-xl border border-white/15 text-brand-200 hover:bg-white/5 text-sm transition-all"
+                  className="btn-ghost"
                 >
                   Batal
                 </button>
@@ -210,21 +228,21 @@ export default function HistoryPage() {
             animate={{ opacity: 1 }}
             className="text-center py-24"
           >
-            <History size={48} className="text-brand-600 mx-auto mb-4" />
-            <h3 className="text-brand-300 font-semibold text-lg mb-2">
-              {history.length === 0 ? "Belum ada riwayat" : "Tidak ditemukan"}
-            </h3>
+            <History size={40} className="text-brand-600 mx-auto mb-4" />
+            <p
+              className="text-brand-300 mb-1"
+              style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 700, fontSize: "1.2rem", letterSpacing: "0.05em" }}
+            >
+              {history.length === 0 ? "BELUM ADA RIWAYAT" : "TIDAK DITEMUKAN"}
+            </p>
             <p className="text-brand-500 text-sm mb-6">
               {history.length === 0
                 ? "Mulai konsultasi pertama Anda untuk melihat riwayat di sini."
                 : "Coba kata kunci pencarian yang berbeda."}
             </p>
             {history.length === 0 && (
-              <Link
-                href="/konsultasi"
-                className="inline-flex items-center gap-2 bg-secondary text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-500 transition-all"
-              >
-                <RotateCcw size={16} />
+              <Link href="/konsultasi" className="btn-amber inline-flex">
+                <RotateCcw size={15} />
                 Mulai Konsultasi
               </Link>
             )}
@@ -244,7 +262,8 @@ export default function HistoryPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ delay: i * 0.04 }}
-                    className="glass-card overflow-hidden"
+                    className="panel overflow-hidden"
+                    style={{ borderLeft: `2px solid ${colors.gauge}30` }}
                   >
                     <div className="p-5">
                       <div className="flex items-start justify-between gap-4">
@@ -252,30 +271,40 @@ export default function HistoryPage() {
                           onClick={() => setExpanded(isExpanded ? null : item.id)}
                           className="flex items-start gap-3 flex-1 text-left"
                         >
-                          <div className={`w-10 h-10 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
-                            <LevelIcon size={18} className={colors.text} />
+                          <div
+                            className={`w-9 h-9 flex items-center justify-center flex-shrink-0 ${colors.bg}`}
+                            style={{ borderRadius: "0.375rem" }}
+                          >
+                            <LevelIcon size={16} className={colors.text} />
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className={`text-sm font-bold ${colors.text}`}>
-                                {item.recommendation}
+                              <span
+                                className={`text-sm font-bold ${colors.text}`}
+                                style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 700, letterSpacing: "0.03em" }}
+                              >
+                                {item.recommendation.toUpperCase()}
                               </span>
-                              <span className="text-brand-500 text-xs font-mono">
-                                {item.ruleApplied}
-                              </span>
+                              <span className="rule-tag">{item.ruleApplied}</span>
                             </div>
                             <div className="flex items-center gap-3 mt-1">
-                              <span className="text-brand-300 text-xs">
+                              <span
+                                className="text-brand-500 text-xs"
+                                style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.6rem" }}
+                              >
                                 {formatDate(item.timestamp)}
                               </span>
-                              <span className="text-primary text-xs font-bold">
-                                CF: {formatCF(item.cfFinal)}
+                              <span
+                                className="cf-value text-xs"
+                                style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem" }}
+                              >
+                                CF {formatCF(item.cfFinal)}
                               </span>
                             </div>
                           </div>
                           <ChevronDown
-                            size={16}
-                            className={`text-brand-400 flex-shrink-0 transition-transform duration-200 mt-1 ${
+                            size={15}
+                            className={`text-brand-500 flex-shrink-0 transition-transform duration-200 mt-1 ${
                               isExpanded ? "rotate-180" : ""
                             }`}
                           />
@@ -283,10 +312,11 @@ export default function HistoryPage() {
 
                         <button
                           onClick={() => deleteHistoryItem(item.id)}
-                          className="p-2 rounded-lg text-brand-500 hover:text-red-400 hover:bg-red-500/10 transition-all flex-shrink-0"
+                          className="p-2 text-brand-600 hover:text-red-400 hover:bg-red-500/10 transition-all flex-shrink-0"
+                          style={{ borderRadius: "0.375rem" }}
                           title="Hapus"
                         >
-                          <Trash2 size={15} />
+                          <Trash2 size={14} />
                         </button>
                       </div>
                     </div>
@@ -297,40 +327,58 @@ export default function HistoryPage() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="border-t border-white/5 px-5 pb-5 pt-4 bg-white/2"
+                          className="border-t border-brand-200/8 px-5 pb-5 pt-4 bg-brand-900/40"
                         >
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-                            <div>
-                              <p className="text-brand-400 text-xs">Status Member</p>
-                              <p className={`text-sm font-semibold mt-0.5 ${item.memberStatusResult ? "text-emerald-400" : "text-red-400"}`}>
-                                {item.memberStatusResult ? "Terverifikasi" : "Tidak Valid"}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-brand-400 text-xs">Tingkat Risiko</p>
-                              <p className={`text-sm font-semibold mt-0.5 ${item.severityResult === "High Risk" ? "text-red-400" : "text-emerald-400"}`}>
-                                {item.severityResult}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-brand-400 text-xs">Tipe Kasus</p>
-                              <p className="text-brand-200 text-sm font-semibold mt-0.5">
-                                {item.formSnapshot?.caseType ?? "—"}
-                              </p>
-                            </div>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-5">
+                            {[
+                              {
+                                label: "STATUS MEMBER",
+                                val: item.memberStatusResult ? "TERVERIFIKASI" : "TIDAK VALID",
+                                color: item.memberStatusResult ? "text-emerald-400" : "text-red-400",
+                              },
+                              {
+                                label: "TINGKAT RISIKO",
+                                val: item.severityResult,
+                                color: item.severityResult === "High Risk" ? "text-red-400" : "text-emerald-400",
+                              },
+                              {
+                                label: "TIPE KASUS",
+                                val: item.formSnapshot?.caseType ?? "—",
+                                color: "text-brand-200",
+                              },
+                            ].map(({ label, val, color }) => (
+                              <div key={label}>
+                                <p
+                                  className="text-brand-600 mb-1"
+                                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.55rem", letterSpacing: "0.15em" }}
+                                >
+                                  {label}
+                                </p>
+                                <p
+                                  className={`text-xs font-bold ${color}`}
+                                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.7rem" }}
+                                >
+                                  {val}
+                                </p>
+                              </div>
+                            ))}
                           </div>
 
-                          <div className="space-y-2">
+                          <p className="overline mb-3" style={{ fontSize: "0.55rem" }}>CF BREAKDOWN</p>
+                          <div className="space-y-2.5">
                             {[item.cfMemberFactor, item.cfCaseFactor, item.cfProblemFactor].map((f) => (
                               <div key={f.rule} className="flex items-center gap-3">
-                                <span className="text-brand-500 text-xs font-mono w-8">{f.rule}</span>
-                                <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                <span className="rule-tag w-10 text-center flex-shrink-0">{f.rule}</span>
+                                <div className="flex-1 h-px bg-brand-200/10 overflow-hidden">
                                   <div
-                                    className="h-full bg-secondary rounded-full"
+                                    className="h-full bg-accent"
                                     style={{ width: `${Math.max(0, f.cf) * 100}%` }}
                                   />
                                 </div>
-                                <span className="text-primary text-xs font-bold w-12 text-right">
+                                <span
+                                  className="cf-value text-xs w-12 text-right flex-shrink-0"
+                                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem" }}
+                                >
                                   {formatCF(f.cf)}
                                 </span>
                               </div>

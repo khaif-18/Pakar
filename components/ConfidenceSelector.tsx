@@ -10,28 +10,28 @@ interface Props {
   label?: string;
 }
 
-const colorMap: Record<string, string> = {
-  "Sangat Yakin": "border-emerald-500 bg-emerald-500/20 text-emerald-300",
-  "Yakin": "border-emerald-400 bg-emerald-400/15 text-emerald-300",
-  "Cukup Yakin": "border-blue-400 bg-blue-400/15 text-blue-300",
-  "Kurang Yakin": "border-yellow-400 bg-yellow-400/15 text-yellow-300",
-  "Tidak Tahu": "border-gray-400 bg-gray-400/15 text-gray-300",
-  "Kurang Tidak Yakin": "border-orange-400 bg-orange-400/15 text-orange-300",
-  "Cukup Tidak Yakin": "border-orange-500 bg-orange-500/15 text-orange-300",
-  "Tidak Yakin": "border-red-400 bg-red-400/15 text-red-300",
-  "Sangat Tidak Yakin": "border-red-600 bg-red-600/20 text-red-300",
-};
-
-const defaultColor =
-  "border-white/20 bg-white/5 text-brand-300 hover:border-white/30 hover:bg-white/10";
+function getCfColor(lbl: ConfidenceLabel, active: boolean): string {
+  if (!active) return "border-brand-200/10 bg-brand-800/40 text-brand-400 hover:border-brand-200/20 hover:text-brand-200";
+  const cf = CF_MAP[lbl];
+  if (cf >= 0.6) return "border-emerald-500/60 bg-emerald-500/10 text-emerald-300";
+  if (cf >= 0.2) return "border-blue-400/60 bg-blue-500/10 text-blue-300";
+  if (cf >= 0) return "border-brand-300/40 bg-brand-700/40 text-brand-200";
+  if (cf >= -0.4) return "border-orange-400/60 bg-orange-500/10 text-orange-300";
+  return "border-red-500/60 bg-red-500/10 text-red-300";
+}
 
 export default function ConfidenceSelector({ value, onChange, label }: Props) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2.5">
       {label && (
-        <p className="text-brand-200 text-sm font-medium">{label}</p>
+        <p
+          className="text-brand-400 text-xs tracking-widest uppercase"
+          style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.6rem", letterSpacing: "0.15em" }}
+        >
+          {label}
+        </p>
       )}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {CONFIDENCE_LABELS.map((lbl) => {
           const active = value === lbl;
           return (
@@ -40,15 +40,17 @@ export default function ConfidenceSelector({ value, onChange, label }: Props) {
               type="button"
               onClick={() => onChange(lbl)}
               className={cn(
-                "px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-150 cursor-pointer",
-                active ? colorMap[lbl] : defaultColor
+                "px-2.5 py-1.5 rounded border text-xs font-medium transition-all duration-150 cursor-pointer",
+                getCfColor(lbl, active)
               )}
             >
               {lbl}
               {active && (
-                <span className="ml-1.5 font-mono opacity-70">
-                  ({CF_MAP[lbl] > 0 ? "+" : ""}
-                  {CF_MAP[lbl].toFixed(1)})
+                <span
+                  className="ml-1.5 opacity-70"
+                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65em" }}
+                >
+                  ({CF_MAP[lbl] > 0 ? "+" : ""}{CF_MAP[lbl].toFixed(1)})
                 </span>
               )}
             </button>

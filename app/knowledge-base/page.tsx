@@ -44,7 +44,7 @@ export default function KnowledgeBasePage() {
             </div>
           </div>
 
-          <div className="glass-card p-5 flex items-start gap-3">
+          <div className="panel p-5 flex items-start gap-3 border-l-2 border-accent/30">
             <Info size={18} className="text-primary mt-0.5 flex-shrink-0" />
             <div>
               <p className="text-brand-200 text-sm leading-relaxed">
@@ -104,7 +104,7 @@ export default function KnowledgeBasePage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04 }}
-                className={`glass-card border ${colors.border} overflow-hidden`}
+                className={`panel border-l-2 ${colors.border} overflow-hidden`}
               >
                 <button
                   onClick={() => setExpanded(isExpanded ? null : rule.id)}
@@ -189,7 +189,7 @@ export default function KnowledgeBasePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-10 glass-card p-6"
+          className="mt-10 panel p-6"
         >
           <h3 className="text-brand-50 font-bold text-base mb-5">Skala Nilai CF</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -54,18 +54,18 @@ function RadioOption({
     <button
       type="button"
       onClick={() => onChange(value)}
-      className={`flex-1 p-4 rounded-xl border text-left transition-all duration-200 ${
+      className={`flex-1 p-4 rounded border text-left transition-all duration-200 ${
         selected === value
-          ? "border-secondary bg-secondary/20 text-brand-50"
-          : "border-white/15 bg-white/5 text-brand-300 hover:border-white/30 hover:bg-white/10"
+          ? "border-accent/50 bg-accent/5 text-brand-50"
+          : "border-brand-200/10 bg-brand-800/30 text-brand-300 hover:border-brand-200/20 hover:bg-brand-800/50"
       }`}
     >
       <div className="flex items-center gap-3">
         <div
-          className={`w-4 h-4 rounded-full border-2 flex-shrink-0 transition-colors ${
+          className={`w-3.5 h-3.5 rounded-sm border-2 flex-shrink-0 transition-colors ${
             selected === value
-              ? "border-secondary bg-secondary"
-              : "border-brand-400"
+              ? "border-accent bg-accent"
+              : "border-brand-500"
           }`}
         />
         <div>
@@ -399,43 +399,51 @@ export default function KonsultasiPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-10"
+          className="mb-10"
         >
-          <h1 className="text-4xl font-black text-brand-50 mb-2">Konsultasi</h1>
-          <p className="text-brand-200">
+          <p className="overline mb-2">KONSULTASI SISTEM PAKAR</p>
+          <h1
+            className="display-heading text-5xl text-brand-50 mb-2"
+            style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 900 }}
+          >
+            ANALISIS KENDARAAN
+          </h1>
+          <p className="text-brand-300 text-sm">
             Jawab 4 pertanyaan berikut untuk mendapatkan rekomendasi level support.
           </p>
         </motion.div>
 
         {/* Step indicators */}
-        <div className="flex items-center justify-center gap-2 mb-8">
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1">
           {STEPS.map(({ id, icon: Icon, title }) => (
-            <div key={id} className="flex items-center gap-2">
+            <div key={id} className="flex items-center gap-2 flex-shrink-0">
               <div
-                className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-300 ${
+                className={`flex items-center gap-2 px-3 py-2 rounded border text-xs font-medium transition-all duration-300 ${
                   step === id
-                    ? "bg-secondary text-white"
+                    ? "border-accent/50 bg-accent/10 text-accent"
                     : step > id
-                    ? "bg-emerald-500/20 text-emerald-300"
-                    : "bg-white/5 text-brand-400"
+                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                    : "border-brand-200/10 bg-brand-800/30 text-brand-500"
                 }`}
+                style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 700, letterSpacing: "0.04em" }}
               >
-                <Icon size={16} />
-                <span className="text-xs font-semibold hidden sm:inline">{title}</span>
+                <Icon size={13} />
+                <span className="hidden sm:inline uppercase">{title}</span>
               </div>
               {id < STEPS.length - 1 && (
-                <div className={`w-6 h-px ${step > id ? "bg-emerald-500/50" : "bg-white/10"}`} />
+                <div className={`w-5 h-px flex-shrink-0 ${step > id ? "bg-emerald-500/30" : "bg-brand-200/8"}`} />
               )}
             </div>
           ))}
         </div>
 
-        {/* Progress bar */}
-        <div className="h-1.5 bg-white/10 rounded-full mb-8 overflow-hidden">
+        {/* Progress bar — amber gradient */}
+        <div className="h-px bg-brand-200/8 mb-8 overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-secondary to-primary rounded-full"
-            animate={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="h-full origin-left"
+            style={{ background: "linear-gradient(90deg, #f59e0b, #b1d4e8)" }}
+            animate={{ scaleX: (step + 1) / STEPS.length }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           />
         </div>
 
@@ -444,15 +452,21 @@ export default function KonsultasiPage() {
           {/* Wizard (main) */}
           <div className="flex-1 min-w-0">
             {/* Card */}
-            <div className="glass-card p-6 md:p-8 min-h-[400px] relative overflow-hidden">
-              <div className="mb-6">
-                <div className="flex items-center gap-2 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                  <span>Langkah {step + 1} dari {STEPS.length}</span>
-                </div>
-                <h2 className="text-xl font-bold text-brand-50">
-                  {STEPS[step].title}
+            <div className="panel p-6 md:p-8 min-h-[400px] relative overflow-hidden">
+              <div className="mb-7">
+                <p
+                  className="text-brand-500 text-xs mb-2 uppercase tracking-widest"
+                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.6rem", letterSpacing: "0.2em" }}
+                >
+                  LANGKAH {step + 1} / {STEPS.length}
+                </p>
+                <h2
+                  className="text-2xl text-brand-50 mb-1"
+                  style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 800, letterSpacing: "0.02em" }}
+                >
+                  {STEPS[step].title.toUpperCase()}
                 </h2>
-                <p className="text-brand-300 text-sm">{STEPS[step].desc}</p>
+                <p className="text-brand-400 text-sm">{STEPS[step].desc}</p>
               </div>
 
               <AnimatePresence mode="wait" custom={direction}>
@@ -475,9 +489,9 @@ export default function KonsultasiPage() {
               <button
                 onClick={goPrev}
                 disabled={step === 0}
-                className="flex items-center gap-2 px-5 py-3 rounded-xl border border-white/15 text-brand-300 hover:text-brand-50 hover:bg-white/5 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed font-medium"
+                className="btn-ghost"
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft size={16} />
                 Kembali
               </button>
 
@@ -485,25 +499,27 @@ export default function KonsultasiPage() {
                 <button
                   onClick={goNext}
                   disabled={!isStepValid()}
-                  className="flex items-center gap-2 bg-secondary hover:bg-brand-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200"
+                  className="btn-amber"
+                  style={{ borderRadius: "0.375rem" }}
                 >
                   Lanjut
-                  <ChevronRight size={18} />
+                  <ChevronRight size={16} />
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="flex items-center gap-2 bg-secondary hover:bg-brand-500 disabled:opacity-50 text-white font-bold px-6 py-3 rounded-xl transition-all duration-200"
+                  className="btn-amber"
+                  style={{ borderRadius: "0.375rem" }}
                 >
                   {loading ? (
                     <>
-                      <Loader2 size={18} className="animate-spin" />
+                      <Loader2 size={16} className="animate-spin" />
                       Memproses...
                     </>
                   ) : (
                     <>
-                      <CheckSquare size={18} />
+                      <CheckSquare size={16} />
                       Proses Konsultasi
                     </>
                   )}
