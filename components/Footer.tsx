@@ -31,14 +31,14 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="mailto:support@ebengkel.id"
+                href="mailto:khalifaherian@gmail.com"
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-brand-300 hover:text-brand-100 transition-all duration-200"
                 aria-label="Email"
               >
                 <Mail size={16} />
               </a>
               <a
-                href="https://discord.gg"
+                href="https://discord.gg/khaif"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-brand-300 hover:text-brand-100 transition-all duration-200"
@@ -47,7 +47,7 @@ export default function Footer() {
                 <MessageCircle size={16} />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/khaif-18"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-brand-300 hover:text-brand-100 transition-all duration-200"
